@@ -2,7 +2,7 @@
 
 ## 📌 Overview
 
-This project presents a **Molecular Dynamics (MD) simulation implemented in Scilab**, where particles evolve over time under inter-particle forces. The simulation demonstrates how an initially ordered configuration evolves into a **distorted/disordered state** due to interactions.
+This project implements a **classical Molecular Dynamics (MD) simulation** using **Scilab**. The simulation studies how an initially ordered system of particles evolves over time into a **distorted/disordered configuration** due to inter-particle interactions.
 
 ---
 
@@ -10,18 +10,19 @@ This project presents a **Molecular Dynamics (MD) simulation implemented in Scil
 
 ### Newton’s Equation of Motion
 
-The motion of each particle is governed by:
+The motion of particles is governed by:
 
 F = m a
 
-For N-particle system:
+For an N-particle system:
+
 m d²r/dt² = F
 
 ---
 
 ### Interatomic Interaction
 
-Particles interact via a model potential (e.g., Lennard-Jones type), which includes:
+Particles interact through a model potential (Lennard-Jones type), which includes:
 
 * Short-range repulsion
 * Long-range attraction
@@ -30,13 +31,13 @@ Particles interact via a model potential (e.g., Lennard-Jones type), which inclu
 
 ### Verlet Algorithm
 
-The position update is:
+The position update equation is:
 
 r(t+Δt) = 2r(t) - r(t-Δt) + a(t)Δt²
 
-✔ Stable
-✔ Energy conserving
-✔ Suitable for MD simulations
+✔ Simple and stable
+✔ Good energy conservation
+✔ Widely used in MD simulations
 
 ---
 
@@ -44,10 +45,10 @@ r(t+Δt) = 2r(t) - r(t-Δt) + a(t)Δt²
 
 1. Initialize particle positions (ordered structure)
 2. Assign initial velocities
-3. Compute forces between particles
+3. Compute inter-particle forces
 4. Update positions using Verlet algorithm
 5. Repeat for multiple time steps
-6. Observe structural evolution
+6. Observe system evolution
 
 ---
 
@@ -55,10 +56,13 @@ r(t+Δt) = 2r(t) - r(t-Δt) + a(t)Δt²
 
 ```
 molecular-dynamics-simulation/
-│── src/              # Scilab code (.sce / .sci)
-│── input/            # initial configuration
+│── src/              # Scilab code
+│── input/            # initial conditions
 │── output/           # simulation data
-│── plots/            # images (initial & distorted states)
+│── initial1.png
+│── initial2.png
+│── final1.png
+│── final2.png
 │── README.md
 ```
 
@@ -80,54 +84,56 @@ dt = 0.01;      // time step
 
 ---
 
-## 📊 Results
-
-The simulation shows **structural evolution of particles**:
+## 📊 Simulation Results
 
 ### 🔹 Initial Configuration
 
-![Initial State 1](plots/initial1.png)
-![Initial State 2](plots/initial2.png)
+<p align="center">
+  <img src="initial1.png" width="45%">
+  <img src="initial2.png" width="45%">
+</p>
 
-👉 Particles are arranged in an ordered configuration.
+👉 Particles are arranged in an ordered configuration at the beginning.
 
 ---
 
 ### 🔹 After Distortion (Time Evolution)
 
-![Distorted State 1](plots/final1.png)
-![Distorted State 2](plots/final2.png)
+<p align="center">
+  <img src="final1.png" width="45%">
+  <img src="final2.png" width="45%">
+</p>
 
-👉 Due to inter-particle forces, the system evolves into a **distorted/disordered state**.
+👉 Due to inter-particle interactions, the system evolves into a distorted/disordered state.
 
 ---
 
 ## 📈 Observations
 
-* Initially ordered system becomes unstable over time
-* Particle interactions lead to distortion
-* Demonstrates fundamental MD behavior
-* Sensitive to time step and initial conditions
+* Ordered structure becomes unstable over time
+* Inter-particle forces lead to distortion
+* System evolution depends on initial conditions
+* Time step affects stability and accuracy
 
 ---
 
 ## 🚀 How to Run
 
-1. Open Scilab
-2. Load the script:
+1. Open **Scilab**
+2. Load your script:
 
 ```
 exec('main.sce');
 ```
 
-3. Run simulation
+3. Run the simulation
 
 ---
 
 ## 📉 Error & Stability
 
 * Smaller time step (dt) → better accuracy
-* Large dt → instability
+* Larger dt → numerical instability
 * Energy conservation used for validation
 
 ---
@@ -135,18 +141,10 @@ exec('main.sce');
 ## 🔬 Applications
 
 * Condensed matter physics
-* Materials science
 * Statistical mechanics
-* Particle system simulations
+* Materials science
+* Particle simulations
 
----
-
-## 🔧 Future Improvements
-
-* Add energy vs time plots
-* Implement Velocity-Verlet
-* Extend to 3D systems
-* Add temperature control (thermostats)
 
 ---
 
