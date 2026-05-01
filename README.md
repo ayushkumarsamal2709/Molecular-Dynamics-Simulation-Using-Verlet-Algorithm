@@ -2,9 +2,7 @@
 
 ## 📌 Overview
 
-This project presents a **classical Molecular Dynamics (MD) simulation** implemented in Scilab. The simulation models a system of interacting particles confined in a three-dimensional box and evolves their motion over time using the **Verlet integration algorithm**.
-
-The system begins with an ordered lattice configuration and evolves dynamically under inter-particle forces, demonstrating the transition toward a more complex state governed by physical interactions.
+This project presents a **classical Molecular Dynamics (MD) simulation** implemented in Scilab. The simulation studies the evolution of a system of interacting particles using the **Verlet integration algorithm**. An initially ordered lattice structure evolves over time due to inter-particle forces, demonstrating fundamental concepts of statistical mechanics and condensed matter physics.
 
 ---
 
@@ -24,53 +22,75 @@ m d²r/dt² = F
 
 ### Lennard-Jones Potential
 
-The interaction between particles is modeled using the Lennard-Jones potential:
+Particles interact via the Lennard-Jones potential:
 
 V(r) = 4ε [ (σ/r)¹² − (σ/r)⁶ ]
 
 This potential represents:
 
-* Strong **repulsion** at short distances
-* Weak **attraction** at larger distances
+* Strong repulsion at short distances
+* Weak attraction at long distances
 
 ---
 
 ### Periodic Boundary Conditions
 
-To simulate an infinite system using a finite box, **periodic boundary conditions** are applied. When particles cross the simulation box boundary, they re-enter from the opposite side.
+To simulate bulk behavior, periodic boundary conditions are applied. When a particle crosses the simulation box boundary, it re-enters from the opposite side.
 
 ---
 
 ### Verlet Integration Algorithm
 
-The time evolution of particle positions is computed using:
+The position update equation is:
 
 r(t + Δt) = 2r(t) − r(t − Δt) + a(t)Δt²
 
 This method is:
 
-* Numerically stable
-* Efficient for large systems
-* Widely used in MD simulations
+* Stable and efficient
+* Energy conserving
+* Widely used in molecular dynamics simulations
 
 ---
 
 ## ⚙️ Simulation Methodology
 
-1. Generate initial particle positions using a cubic lattice
+1. Generate initial particle positions using a lattice
 2. Assign random initial velocities
-3. Scale velocities to match desired temperature
-4. Compute inter-particle forces using Lennard-Jones potential
+3. Normalize velocities according to temperature
+4. Compute forces using Lennard-Jones interaction
 5. Apply periodic boundary conditions
-6. Integrate equations of motion using Verlet algorithm
+6. Update positions using Verlet algorithm
 7. Calculate potential energy over time
 8. Perform averaging after equilibration
 
 ---
 
+## 📊 Simulation Results
+
+### 🔹 Initial Configuration
+
+![Initial Configuration 1](initial1.png)
+
+![Initial Configuration 2](initial2.png)
+
+👉 Particles are arranged in an ordered lattice structure at the beginning.
+
+---
+
+### 🔹 After Distortion (Time Evolution)
+
+![Distorted State 1](final1.png)
+
+![Distorted State 2](final2.png)
+
+👉 The system evolves into a distorted configuration due to inter-particle interactions.
+
+---
+
 ## 📂 Project Structure
 
-```id="s1"
+```id="ps1"
 Molecular-Dynamics-Simulation/
 │── main.sce
 │── initial1.png
@@ -84,9 +104,9 @@ Molecular-Dynamics-Simulation/
 
 ## 💻 Scilab Implementation
 
-### 🔹 Lattice Generator
+### Lattice Generator
 
-```scilab id="s2"
+```scilab id="c1"
 function [a1,a2,a3] = lattice_pos(index,Lx,Ly,Lz,a)
 n = ceil(index^(1/3));
 count = 1;
@@ -109,9 +129,9 @@ endfunction
 
 ---
 
-### 🔹 Initialization
+### Initialization
 
-```scilab id="s3"
+```scilab id="c2"
 function [x,y,z,vx,vy,vz,xm,ym,zm] = init(npart,Lx,Ly,Lz,a,temp,dt)
 
 sumv2 = 0;
@@ -143,9 +163,9 @@ endfunction
 
 ---
 
-### 🔹 Force Calculation (Lennard-Jones)
+### Force Calculation (Lennard-Jones)
 
-```scilab id="s4"
+```scilab id="c3"
 function [fx,fy,fz,en] = force(npart,x,y,z,L,rc)
 
 rc2 = rc*rc;
@@ -193,9 +213,9 @@ endfunction
 
 ---
 
-### 🔹 Verlet Integration
+### Verlet Integration
 
-```scilab id="s5"
+```scilab id="c4"
 function [x,y,z,xm,ym,zm] = integ(fx,fy,fz,npart,x,y,z,xm,ym,zm,dt)
 
 for i=1:npart
@@ -217,9 +237,9 @@ endfunction
 
 ---
 
-### 🔹 Main Simulation
+### Main Simulation
 
-```scilab id="s6"
+```scilab id="c5"
 clear;
 clc;
 
@@ -290,22 +310,12 @@ end
 
 ---
 
-## 📊 Results and Observations
-
-* The system evolves dynamically under inter-particle forces
-* Potential energy varies with time and stabilizes after equilibration
-* Average energy depends on particle density
-* Error bars indicate statistical fluctuations in energy
-
----
-
 ## 🚀 How to Run
 
 1. Open Scilab
-2. Load the script
-3. Execute:
+2. Execute:
 
-```id="run1"
+```id="run_final"
 exec('main.sce');
 ```
 
